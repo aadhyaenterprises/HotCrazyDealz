@@ -245,13 +245,70 @@
             opacity: 0.9;
         }
 
-        /* Footer */
+        /* Footer & Policies */
         footer {
             background: var(--dark-black);
             color: #aaa;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem 1rem;
             margin-top: 4rem;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Modal Styles for Policies */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            color: #333;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
         }
     </style>
 </head>
@@ -290,12 +347,54 @@
         <button class="checkout-btn" onclick="payWithRazorpay()">Pay with Razorpay</button>
     </div>
 
+    <!-- Footer with Compliance Links -->
     <footer>
-        <p>&copy; 2026 HotCrazyDealZ. All rights reserved. Powered by Independent Hosting.</p>
+        <div class="footer-links">
+            <a href="#" onclick="openModal('termsModal')">Terms & Conditions</a>
+            <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a>
+            <a href="#" onclick="openModal('refundModal')">Shipping & Refund Policy</a>
+            <a href="#" onclick="openModal('contactModal')">Contact Us</a>
+        </div>
+        <p>&copy; 2026 HotCrazyDealZ. All rights reserved.</p>
     </footer>
 
+    <!-- Policy Modals -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
+            <h2>Terms & Conditions</h2>
+            <p style="margin-top: 1rem; line-height: 1.6;">Welcome to HotCrazyDealZ. By using our website and purchasing products, you agree to comply with and be bound by the following terms and conditions. All prices are listed in INR. We reserve the right to change prices or discontinue products at any time.</p>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
+            <h2>Privacy Policy</h2>
+            <p style="margin-top: 1rem; line-height: 1.6;">Your privacy is important to us. HotCrazyDealZ collects minimal personal details strictly required for shipping and order processing. Payments are securely processed via Razorpay; we do not store your credit card or banking credentials.</p>
+        </div>
+    </div>
+
+    <div id="refundModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('refundModal')">&times;</button>
+            <h2>Shipping & Refund Policy</h2>
+            <p style="margin-top: 1rem; line-height: 1.6;">Orders are typically processed and shipped within 3-5 business days. If you receive a damaged or defective product, you can request a return or replacement within 7 days of delivery by contacting our support team.</p>
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('contactModal')">&times;</button>
+            <h2>Contact Us</h2>
+            <p style="margin-top: 1rem; line-height: 1.6;">If you have any questions, complaints, or inquiries regarding your order, please reach out to us:</p>
+            <p style="margin-top: 0.5rem;"><strong>Website:</strong> hotcrazydealz.com</p>
+            <p><strong>Email:</strong> support@hotcrazydealz.com</p>
+        </div>
+    </div>
+
     <script>
-        // Sample Products Catalog (Update or add inventory here later)
+        // Sample Products Catalog
         const products = [
             { id: 1, name: "Wireless Bluetooth Earbuds", price: 999, image: "Earbuds" },
             { id: 2, name: "Smart Fitness Watch", price: 1499, image: "Smartwatch" },
@@ -375,8 +474,8 @@
             }
 
             var options = {
-                "key": ""key": "OEqWgZTFFyJqBO",", // Replace with your key from Razorpay Dashboard
-                "amount": totalAmount * 100, // Amount in paise
+                "key": "OEqWgZTFFyJqBO", 
+                "amount": totalAmount * 100, 
                 "currency": "INR",
                 "name": "HotCrazyDealZ",
                 "description": "E-Commerce Order Checkout",
@@ -392,6 +491,16 @@
             };
             var rzp1 = new Razorpay(options);
             rzp1.open();
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            event.preventDefault();
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         // Initialize store on load
