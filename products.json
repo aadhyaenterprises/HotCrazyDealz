@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Kids Lunch Box",
+    "price": 799,
+    "image": "Lunch Box"
+  },
+  {
+    "id": 2,
+    "name": "Kids Water Bottle",
+    "price": 699,
+    "image": "Water Bottle"
+  },
+  {
+    "id": 3,
+    "name": "Designer Bag",
+    "price": 1999,
+    "image": "Designer Bag"
+  }
+]
