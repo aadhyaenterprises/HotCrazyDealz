@@ -326,11 +326,51 @@
         <p>Welcome back to your favorite independent store. Zero hidden fees, maximum savings.</p>
     </section>
 
-    <!-- Product Catalog -->
+    <!-- Product Catalog (Hardcoded for direct visibility) -->
     <div class="container">
         <h2 class="section-title">Featured Products</h2>
-        <div class="product-grid" id="product-grid">
-            <!-- Dynamically populated via JS -->
+        <div class="product-grid">
+            
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">[ Image: Earbuds ]</div>
+                <div class="product-info">
+                    <div class="product-title">Wireless Bluetooth Earbuds</div>
+                    <div class="product-price">₹999</div>
+                    <button class="add-to-cart" onclick="addToCart(1, 'Wireless Bluetooth Earbuds', 999)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">[ Image: Smartwatch ]</div>
+                <div class="product-info">
+                    <div class="product-title">Smart Fitness Watch</div>
+                    <div class="product-price">₹1499</div>
+                    <button class="add-to-cart" onclick="addToCart(2, 'Smart Fitness Watch', 1499)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">[ Image: Keyboard ]</div>
+                <div class="product-info">
+                    <div class="product-title">RGB Gaming Mechanical Keyboard</div>
+                    <div class="product-price">₹2199</div>
+                    <button class="add-to-cart" onclick="addToCart(3, 'RGB Gaming Mechanical Keyboard', 2199)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">[ Image: Powerbank ]</div>
+                <div class="product-info">
+                    <div class="product-title">Portable Fast Power Bank 20000mAh</div>
+                    <div class="product-price">₹1799</div>
+                    <button class="add-to-cart" onclick="addToCart(4, 'Portable Fast Power Bank 20000mAh', 1799)">Add to Cart</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -394,45 +434,21 @@
     </div>
 
     <script>
-        // Sample Products Catalog
-        const products = [
-            { id: 1, name: "Wireless Bluetooth Earbuds", price: 999, image: "Earbuds" },
-            { id: 2, name: "Smart Fitness Watch", price: 1499, image: "Smartwatch" },
-            { id: 3, name: "RGB Gaming Mechanical Keyboard", price: 2199, image: "Keyboard" },
-            { id: 4, name: "Portable Fast Power Bank 20000mAh", price: 1799, image: "Powerbank" }
-        ];
-
         let cart = [];
 
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = products.map(product => `
-                <div class="product-card">
-                    <div class="product-image">[ Image: ${product.image} ]</div>
-                    <div class="product-info">
-                        <div class="product-title">${product.name}</div>
-                        <div class="product-price">₹${product.price}</div>
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
-                    </div>
-                </div>
-            `).join('');
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ id, name, price, qty: 1 });
+            }
+            updateCartUI();
+            toggleCart();
         }
 
         function toggleCart() {
             document.getElementById('cartDrawer').classList.toggle('open');
-        }
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.qty += 1;
-            } else {
-                cart.push({ ...product, qty: 1 });
-            }
-            updateCartUI();
-            toggleCart();
         }
 
         function updateCartUI() {
@@ -493,7 +509,6 @@
             rzp1.open();
         }
 
-        // Modal Functions
         function openModal(modalId) {
             event.preventDefault();
             document.getElementById(modalId).style.display = 'flex';
@@ -502,9 +517,6 @@
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
-
-        // Initialize store on load
-        renderProducts();
     </script>
 </body>
 </html>
