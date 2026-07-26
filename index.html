@@ -31,7 +31,7 @@
         header {
             background: #ffffff;
             border-bottom: 3px solid var(--primary-blue);
-            padding: 1rem 5%;
+            padding: 0.8rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,19 +40,11 @@
             z-index: 100;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--dark-black);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
         }
-
-        .logo span.blue { color: var(--primary-blue); }
-        .logo span.orange { color: var(--fiery-orange); }
-        .logo span.pink { color: var(--hot-pink); }
 
         .cart-btn {
             background: var(--fiery-orange);
@@ -314,9 +306,11 @@
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header with Image Logo -->
     <header>
-        <a href="#" class="logo">Hot<span class="orange">Crazy</span><span class="blue">Deal</span><span class="pink">Z</span></a>
+        <a href="#">
+            <img src="logo.png" alt="HotCrazyDealZ Logo" class="logo-img">
+        </a>
         <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
     </header>
 
